@@ -1,3 +1,6 @@
+# no data, no data
+*.json
+
 # Logs
 logs
 *.log
