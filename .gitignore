@@ -1,5 +1,5 @@
 # no data, no data
-*.json
+data/
 
 # Logs
 logs
