@@ -1,0 +1,21 @@
+{
+  "name": "cosc671-mongodb-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "GPL",
+  "dependencies": {
+    "ajaxer": "git+https://github.com/power-cosmic/ajaxer.git",
+    "body-parser": "~1.8.0",
+    "ejs": "^1.0.0",
+    "express": "latest",
+    "method-override": "~2.2.0",
+    "mongodb": "latest",
+    "morgan": "latest"
+  }
+}
