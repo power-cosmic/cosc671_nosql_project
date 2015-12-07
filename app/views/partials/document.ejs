@@ -3,35 +3,39 @@
 
 
   <% if (!variable) { %>
-
-    <%= variable %>
+    <div class="variable">
+      <%= variable %>
+    </div>
 
   <%  } else if (variable instanceof Array) { %>
-    <% variable.forEach(function(element) { %>
-      <div class="element">
-        <% render(element) %>
-      </div>
-    <% }); %>
-    <% } else if (typeof variable === 'object') {
-      Object.keys(variable).forEach(function(key) { %>
-        <div class="pair">
-          <div class="key">
-            <%= key %>
-          </div>
-          <div class="value">
-
-            <% render(variable[key]); %>
-          </div>
-
+    <div class="array">
+      <% variable.forEach(function(element) { %>
+        <div class="element">
+          <% render(element) %>
         </div>
-    <% }); %>
-    <% } else { %>
+        <% }); %>
+      </div>
+    <% } else if (typeof variable === 'object') { %>
+      <div class="object">
+        <% Object.keys(variable).forEach(function(key) { %>
+          <div class="pair">
+            <div class="key">
+              <%= key %>
+            </div>
+            <div class="value">
 
+              <% render(variable[key]); %>
+            </div>
+
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="variable">
         <%= variable %>
+      </div>
 
   <%  } %>
 <% }; %>
 
-<div class="variable">
-  <% render(variable); %>
-</div>
+<% render(variable); %>
