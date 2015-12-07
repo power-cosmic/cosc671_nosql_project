@@ -3,22 +3,24 @@
 
 
   <% if (!variable) { %>
-    <div class="variable">
-      <%= variable %>
-    </div>
+
+    <%= variable %>
 
   <%  } else if (variable instanceof Array) { %>
     <div class="array">
       <% variable.forEach(function(element) { %>
         <div class="element">
-          <% render(element) %>
+          <div class="variable">
+            <% render(element) %>
+
+          </div>
         </div>
         <% }); %>
       </div>
     <% } else if (typeof variable === 'object') { %>
       <div class="object">
         <% Object.keys(variable).forEach(function(key) { %>
-          <div class="pair">
+          <div class="variable pair">
             <div class="key">
               <%= key %>
             </div>
@@ -31,11 +33,12 @@
         <% }); %>
       </div>
     <% } else { %>
-      <div class="variable">
-        <%= variable %>
-      </div>
+
+      <%= variable %>
 
   <%  } %>
 <% }; %>
 
-<% render(variable); %>
+<div class="variable">
+  <% render(variable); %>
+</div>

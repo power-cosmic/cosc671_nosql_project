@@ -16,16 +16,19 @@ app.use(morgan('dev'));
 app.route('/')
   .get(function(req, res) {
     res.render('pages/test', {
-      variable: {
-        name: 'test',
-        values: [
-          1,
-          {
-            a: 'a',
-            b: 'b'
-          }
-        ]
-      }
+      variables: [{a:1, b:[2, 3]}, [2, 3]],
+      backup: [  'hello',
+        {
+          name: 'test',
+          values: [
+            1,
+            {
+              a: 'aa',
+              b: 'bb'
+            }
+          ]
+        }
+      ]
     });
   });
 

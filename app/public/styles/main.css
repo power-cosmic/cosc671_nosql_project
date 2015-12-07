@@ -1,21 +1,52 @@
 .variable {
+  padding: 0px;
+  margin: 10px;
   border: 2px solid #223;
+  border-radius: 5px;
 }
 
 .key {
-  display: inline;
+  float: left;
+  width: 100px;
+  padding: 10px;
 }
 
 .value {
-  display: inline;
+  overflow: hidden;
+  border-left: 2px solid #223;
+  padding: 10px;
+}
+
+.pair {
+  overflow: hidden;
+}
+
+.single {
+  padding: 20px;
 }
 
 .element {
-  
+  border-bottom: 2px solid #223;
+}
+
+.element:last-child {
+  border-bottom: none;
+}
+
+.array {
+  padding: 0px;
+  margin: 0px;
+}
+
+.value > .array {
+  margin: -10px;
+}
+
+.element > .variable {
+  border: none;
 }
 
 div {
-  padding: 10px;
-  margin: 10px;
-  border: 2px solid #335;
+  margin: 0px;
+  padding: 0px;
 }
