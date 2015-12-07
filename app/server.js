@@ -13,5 +13,23 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(morgan('dev'));
 
+app.route('/')
+  .get(function(req, res) {
+    res.render('pages/test', {
+      variable: {
+        name: 'test',
+        values: [
+          1,
+          {
+            a: 'a',
+            b: 'b'
+          }
+        ]
+      }
+    });
+  });
+
+app.use(express.static('./public'));
+
 app.listen(port);
 console.log('listening on port ' + port);

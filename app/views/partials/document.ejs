@@ -1,0 +1,37 @@
+<% var render = function(variable) { %>
+
+
+
+  <% if (!variable) { %>
+
+    <%= variable %>
+
+  <%  } else if (variable instanceof Array) { %>
+    <% variable.forEach(function(element) { %>
+      <div class="element">
+        <% render(element) %>
+      </div>
+    <% }); %>
+    <% } else if (typeof variable === 'object') {
+      Object.keys(variable).forEach(function(key) { %>
+        <div class="pair">
+          <div class="key">
+            <%= key %>
+          </div>
+          <div class="value">
+
+            <% render(variable[key]); %>
+          </div>
+
+        </div>
+    <% }); %>
+    <% } else { %>
+
+        <%= variable %>
+
+  <%  } %>
+<% }; %>
+
+<div class="variable">
+  <% render(variable); %>
+</div>
