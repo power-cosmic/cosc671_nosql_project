@@ -39,6 +39,22 @@ app.route('/zips/:city').get(function(req, res) {
   })
 });
 
+app.route('/populations/').get(function(req, res) {
+  MongoClient.connect(db, function(err, db) {
+    db.collection('zips').aggregate([
+      { $group: {
+        _id: '$state',
+      	pop: { $sum: '$pop' }
+      }},
+      { $sort: { _id: 1 }}
+    ]).toArray(function(err, result) {
+      console.log(result);
+      res.render('pages/output', {
+        variables: result
+      })
+   });
+  });
+});
 
 app.param('restName', function(req, res, next, name) {
   MongoClient.connect(db, function(err, db) {
