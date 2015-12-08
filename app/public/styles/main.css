@@ -49,4 +49,14 @@
 div {
   margin: 0px;
   padding: 0px;
+  background-color: #eee;
+}
+
+input[type=text] {
+  width: 400px;
+  margin: 10px;
+}
+
+body {
+  background-color: #444;
 }
