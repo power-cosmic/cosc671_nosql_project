@@ -5,7 +5,10 @@ var express = require('express'),
     methodOverride = require('method-override'),
     MongoClient = require('mongodb').MongoClient,
     db = 'mongodb://localhost/test',
-    port = 8080;
+    port = 8080
+
+    rests = require('./controllers/rest.controller'),
+    zips = require('./controllers/zip.controller');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -40,54 +43,24 @@ app.route('/zips/:city').get(function(req, res) {
 });
 
 app.route('/populations/').get(function(req, res) {
-  MongoClient.connect(db, function(err, db) {
-    db.collection('zips').aggregate([
-      { $group: {
-        _id: '$state',
-      	pop: { $sum: '$pop' }
-      }},
-      { $sort: { _id: 1 }}
-    ]).toArray(function(err, result) {
-      console.log(result);
-      res.render('pages/output', {
-        variables: result
-      })
-   });
-  });
+  zips.getStatePopulations(function(states) {
+    res.render('pages/output', {
+      variables: states
+    })
+  })
 });
 
 app.param('restName', function(req, res, next, name) {
-  MongoClient.connect(db, function(err, db) {
-    db.collection('rest').find({name: name}, function (err, cursor) {
-      var restaurants = [];
-      cursor.each(function(err, restaurant) {
-        if (restaurant) {
-          restaurants.push(restaurant);
-        } else {
-          db.close();
-          req.restaurants = restaurants;
-          next();
-        }
-      })
-    });
-
+  rests.byName(name, function(restaurants) {
+    req.restaurants = restaurants;
+    next();
   });
 });
 
 app.param('city', function(req, res, next, city) {
-  MongoClient.connect(db, function(err, db) {
-    db.collection('zips').find({city: city.toUpperCase()}, function(err, cursor) {
-      var zips = [];
-      cursor.each(function(err, zip) {
-        if (zip) {
-          zips.push(zip);
-        } else {
-          db.close();
-          req.zips = zips;
-          next();
-        }
-      })
-    });
+  zips.findByCity(city, function(zips) {
+    req.zips = zips;
+    next();
   });
 });
 
